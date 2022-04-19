@@ -40,7 +40,7 @@ func New(url string) (mp3 *MP3player, err error) {
 		return mp3, err
 	}
 
-	if mp3.context, err = oto.NewContext(mp3.dec.SampleRate(), 2, 2, 4096); err != nil {
+	if mp3.context, err = oto.NewContext(mp3.dec.SampleRate(), 2, 2, 16384); err != nil {
 		return mp3, err
 	}
 	mp3.player = mp3.context.NewPlayer()
