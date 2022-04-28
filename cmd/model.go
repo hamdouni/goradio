@@ -99,7 +99,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m model) View() (s string) {
-	var head string = "ZiK> " + m.message
+	var head = "ZiK> " + m.message
 	if player != nil && player.Playing {
 		head = m.spin.View() + head
 	}
