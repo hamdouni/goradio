@@ -44,6 +44,6 @@ func play(name string) tea.Cmd {
 		if err != nil {
 			return playerError{err: err}
 		}
-		return playerStarted{status: "playing " + name}
+		return playerStarted{status: fmt.Sprintf("playing %s", name)}
 	}
 }

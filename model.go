@@ -13,6 +13,7 @@ import (
 type station struct {
 	name string
 	uri  string
+	idx  int
 }
 
 func (st station) Title() string       { return st.name }
@@ -21,6 +22,7 @@ func (st station) FilterValue() string { return st.name }
 
 type model struct {
 	stations list.Model
+	current  station
 	message  string
 	spin     spinner.Model
 }
@@ -32,14 +34,16 @@ func initalModel() (m model) {
 	}
 	items := []list.Item{}
 	var st station
-	for _, track := range playlist.Tracks {
+	for i, track := range playlist.Tracks {
 		st = station{
 			name: track.Name,
 			uri:  track.URI,
+			idx:  i,
 		}
 		items = append(items, st)
 	}
 	m.stations = list.New(items, list.NewDefaultDelegate(), 0, 0)
+	m.stations.DisableQuitKeybindings()
 	m.message = "List initialized..."
 	s := spinner.New()
 	s.Spinner = spinner.Dot
@@ -68,19 +72,22 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case playerStarted:
 		m.message = msg.status
 	case playerLoaded:
-		cmds = append(cmds, play(m.selected().name))
+		cmds = append(cmds, play(m.current.name))
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "q":
 			cmds = append(cmds, tea.Quit)
 		case "enter":
-			cmds = append(cmds, load(m.selected().uri))
+			m.current = m.selected()
+			cmds = append(cmds, load(m.current.uri))
+		case "o":
+			m.stations.Select(m.current.idx)
 		case " ":
 			if player != nil && player.Playing {
 				player.Close()
-				m.message = "pause " + m.selected().name
-			} else if m.selected().name != "" {
-				cmds = append(cmds, load(m.selected().uri))
+				m.message = "pause " + m.current.name
+			} else if m.current.uri != "" {
+				cmds = append(cmds, load(m.current.uri))
 			}
 		}
 	case tea.WindowSizeMsg:
