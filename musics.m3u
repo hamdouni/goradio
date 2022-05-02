@@ -1,5 +1,8 @@
 #EXTM3U
-#EXTREM: LES STATIONS DE JAZZ
+#EXTINF:-1,ACADEMY FM For THANET - 256 kbit/s
+http://37.187.93.104:8097/stream/1/
+#EXTINF:0,Rainwave Chiptunes: Relais aléatoire
+http://allrelays.rainwave.cc/chiptune.mp3
 #EXTINF:-1,Jazz Lounge - 320 kbit/s
 http://51.255.235.165:5068/stream/1/
 #EXTINF:-1,Jazz and lounge station
@@ -178,8 +181,6 @@ http://37.187.16.224:8000/stream/1/
 http://radiart.eu:10018/live
 #EXTINF:-1,Djam Radio - 128 kbit/s
 http://ledjamradio.ice.infomaniak.ch/ledjamradio.mp3
-#EXTINF:-1,ACADEMY FM For THANET - 256 kbit/s
-http://37.187.93.104:8097/stream/1/
 #EXTINF:-1,ZEBRadio - 128 kbit/s
 http://player.zebradio.fr:8000/player.mp3
 #EXTINF:-1,La Grosse Radio Rock Alternative - Pop Hits Legends Indie - From Paris - www.lagrosseradio.com - 192 kbit/s
