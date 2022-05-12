@@ -27,7 +27,11 @@ type model struct {
 	spin     spinner.Model
 }
 
-func initalModel() (m model) {
+func initProcess() error {
+	return nil
+}
+
+func initModel() (m model) {
 	playlist, err := m3u.Parse("musics.m3u")
 	if err != nil {
 		log.Fatal(err)

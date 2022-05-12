@@ -40,8 +40,7 @@ func play(name string) tea.Cmd {
 		if player == nil {
 			return playerError{err: fmt.Errorf("player not loaded")}
 		}
-		err := player.Play()
-		if err != nil {
+		if err := player.Play(); err != nil {
 			return playerError{err: err}
 		}
 		return playerStarted{status: fmt.Sprintf("playing %s", name)}
