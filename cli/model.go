@@ -1,7 +1,8 @@
-package main
+package cli
 
 import (
 	"log"
+	"os"
 
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/spinner"
@@ -25,13 +26,14 @@ type model struct {
 	current  station
 	message  string
 	spin     spinner.Model
+	pipe     *os.File
 }
 
 func initProcess() error {
 	return nil
 }
 
-func initModel() (m model) {
+func InitModel(p *os.File) (m model) {
 	playlist, err := m3u.Parse("musics.m3u")
 	if err != nil {
 		log.Fatal(err)
@@ -52,6 +54,7 @@ func initModel() (m model) {
 	s := spinner.New()
 	s.Spinner = spinner.Dot
 	m.spin = s
+	m.pipe = p
 	return m
 }
 
@@ -83,16 +86,20 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			cmds = append(cmds, tea.Quit)
 		case "enter":
 			m.current = m.selected()
-			cmds = append(cmds, load(m.current.uri))
+			m.pipe.Write([]byte("p" + m.current.uri + "\n"))
+			// cmds = append(cmds, load(m.current.uri))
+		case "Q":
+			m.pipe.Write([]byte("q"))
+			cmds = append(cmds, tea.Quit)
 		case "o":
 			m.stations.Select(m.current.idx)
-		case " ":
-			if player != nil && player.Playing {
-				player.Close()
-				m.message = "pause " + m.current.name
-			} else if m.current.uri != "" {
-				cmds = append(cmds, load(m.current.uri))
-			}
+			// case " ":
+			// 	if player != nil && player.Playing {
+			// 		player.Close()
+			// 		m.message = "pause " + m.current.name
+			// 	} else if m.current.uri != "" {
+			// 		cmds = append(cmds, load(m.current.uri))
+			// 	}
 		}
 	case tea.WindowSizeMsg:
 		m.stations.SetSize(msg.Width, msg.Height-3)

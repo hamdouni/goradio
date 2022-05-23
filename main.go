@@ -1,16 +1,25 @@
 package main
 
 import (
-	"fmt"
-	"os"
-
-	tea "github.com/charmbracelet/bubbletea"
+	"flag"
+	"log"
 )
 
+const namedpipe = "/tmp/goradio.np"
+
 func main() {
-	p := tea.NewProgram(initModel(), tea.WithAltScreen())
-	if err := p.Start(); err != nil {
-		fmt.Printf("error: %v", err)
-		os.Exit(1)
+	daemon := flag.Bool("d", false, "daemon server mode")
+	flag.Parse()
+
+	if *daemon {
+		// mode server : on lit le namedpipe
+		if err := server(); err != nil {
+			log.Fatalf("server returns %v", err)
+		}
+	} else {
+		// mode cli : on cherche un server ou on en crée un
+		if err := client(); err != nil {
+			log.Fatalf("client returns %v", err)
+		}
 	}
 }
