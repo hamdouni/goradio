@@ -93,7 +93,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			cmds = append(cmds, tea.Quit)
 		case "o":
 			m.stations.Select(m.current.idx)
-			// case " ":
+		case " ":
+			m.pipe.Write([]byte("z"))
 			// 	if player != nil && player.Playing {
 			// 		player.Close()
 			// 		m.message = "pause " + m.current.name

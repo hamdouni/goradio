@@ -30,6 +30,10 @@ func server() error {
 		switch buf[0] {
 		case 'q':
 			loop = false
+		case 'z':
+			if player != nil {
+				player.Paused = !player.Paused
+			}
 		case 'p':
 			if playing {
 				player.Close()

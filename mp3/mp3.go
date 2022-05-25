@@ -11,6 +11,7 @@ import (
 
 type MP3player struct {
 	Playing bool
+	Paused  bool
 
 	dec     *gomp3.Decoder
 	player  *oto.Player
@@ -68,7 +69,7 @@ func (mp3 *MP3player) Play() (err error) {
 			if err == io.EOF || err != nil {
 				mp3.Playing = false
 			}
-			if mp3.Playing {
+			if mp3.Playing && !mp3.Paused {
 				mp3.player.Write(mp3.data)
 			}
 		}
