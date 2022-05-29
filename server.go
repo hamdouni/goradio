@@ -13,7 +13,7 @@ func server(responder player.Responder) error {
 
 	var loop = true
 	for loop {
-		buf := responder.Read()
+		buf := responder.ReadRequest()
 
 		// ici on doit interpreter le buffer
 		switch buf[0] {
@@ -23,6 +23,12 @@ func server(responder player.Responder) error {
 			if mp3player != nil {
 				mp3player.Paused = !mp3player.Paused
 			}
+		case 's':
+			if mp3player != nil {
+				responder.Write(mp3player.URL)
+			} else {
+				responder.Write("none")
+			}
 		case 'p':
 			if mp3player != nil && mp3player.Playing {
 				mp3player.Close()
@@ -31,7 +37,8 @@ func server(responder player.Responder) error {
 			url := buf[1:]
 			var err error
 			if mp3player, err = mp3.New(url); err != nil {
-				return err
+				// @TODO: write err in response
+				continue
 			}
 			mp3player.Play()
 		}

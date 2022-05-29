@@ -8,8 +8,6 @@ import (
 	"os/exec"
 )
 
-const namedpipe = "/tmp/goradio.np"
-
 func main() {
 	daemon := flag.Bool("d", false, "daemon server mode")
 	flag.Parse()
@@ -27,7 +25,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	// mode cli : on cherche un server ou on en crée un
+	// mode cli
 	if created {
 		// launch server
 		log.Println("client: launching server")

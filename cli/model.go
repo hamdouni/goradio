@@ -13,12 +13,12 @@ import (
 
 type station struct {
 	name string
-	uri  string
+	url  string
 	idx  int
 }
 
 func (st station) Title() string       { return st.name }
-func (st station) Description() string { return st.uri }
+func (st station) Description() string { return st.url }
 func (st station) FilterValue() string { return st.name }
 
 type model struct {
@@ -43,7 +43,7 @@ func InitModel(player player.Player) (m model) {
 	for i, track := range playlist.Tracks {
 		st = station{
 			name: track.Name,
-			uri:  track.URI,
+			url:  track.URI,
 			idx:  i,
 		}
 		items = append(items, st)
@@ -56,6 +56,19 @@ func InitModel(player player.Player) (m model) {
 	m.spin = s
 	m.player = player
 	return m
+}
+
+func (m model) getIndex(url string) int {
+	if url == "none" {
+		return -1
+	}
+	for idx, it := range m.stations.Items() {
+		st := it.(station)
+		if st.url == url {
+			return idx
+		}
+	}
+	return -1
 }
 
 func (m model) Init() tea.Cmd {
@@ -80,13 +93,19 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			cmds = append(cmds, tea.Quit)
 		case "enter":
 			m.current = m.selected()
-			m.player.Play(m.current.uri)
+			m.player.Play(m.current.url)
+			m.message = m.current.name
 			// cmds = append(cmds, load(m.current.uri))
 		case "Q":
 			m.player.Quit()
 			cmds = append(cmds, tea.Quit)
 		case "o":
-			m.stations.Select(m.current.idx)
+			urlplayer := m.player.Status()
+			idx := m.getIndex(urlplayer)
+			if idx > -1 {
+				m.current.idx = idx
+				m.stations.Select(idx)
+			}
 		case " ":
 			m.player.Pause()
 		}

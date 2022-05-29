@@ -13,6 +13,7 @@ import (
 type MP3player struct {
 	Playing bool
 	Paused  bool
+	URL     string
 
 	dec     *gomp3.Decoder
 	player  *oto.Player
@@ -25,8 +26,9 @@ func New(url string) (mp3 *MP3player, err error) {
 
 	mp3 = new(MP3player)
 
-	mp3.data = make([]byte, 512)
 	mp3.Playing = false
+	mp3.URL = url
+	mp3.data = make([]byte, 512)
 
 	mp3.stream, err = http.Get(url)
 	if err != nil {
