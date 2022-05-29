@@ -2,13 +2,13 @@ package cli
 
 import (
 	"log"
-	"os"
 
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/spinner"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/jamesnetherton/m3u"
+	"goradio/player"
 )
 
 type station struct {
@@ -26,14 +26,14 @@ type model struct {
 	current  station
 	message  string
 	spin     spinner.Model
-	pipe     *os.File
+	player   player.Player
 }
 
 func initProcess() error {
 	return nil
 }
 
-func InitModel(p *os.File) (m model) {
+func InitModel(player player.Player) (m model) {
 	playlist, err := m3u.Parse("musics.m3u")
 	if err != nil {
 		log.Fatal(err)
@@ -54,7 +54,7 @@ func InitModel(p *os.File) (m model) {
 	s := spinner.New()
 	s.Spinner = spinner.Dot
 	m.spin = s
-	m.pipe = p
+	m.player = player
 	return m
 }
 
@@ -74,33 +74,21 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
 
 	switch msg := msg.(type) {
-	case playerError:
-		m.message = msg.err.Error()
-	case playerStarted:
-		m.message = msg.status
-	case playerLoaded:
-		cmds = append(cmds, play(m.current.name))
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "q":
 			cmds = append(cmds, tea.Quit)
 		case "enter":
 			m.current = m.selected()
-			m.pipe.Write([]byte("p" + m.current.uri + "\n"))
+			m.player.Play(m.current.uri)
 			// cmds = append(cmds, load(m.current.uri))
 		case "Q":
-			m.pipe.Write([]byte("q"))
+			m.player.Quit()
 			cmds = append(cmds, tea.Quit)
 		case "o":
 			m.stations.Select(m.current.idx)
 		case " ":
-			m.pipe.Write([]byte("z"))
-			// 	if player != nil && player.Playing {
-			// 		player.Close()
-			// 		m.message = "pause " + m.current.name
-			// 	} else if m.current.uri != "" {
-			// 		cmds = append(cmds, load(m.current.uri))
-			// 	}
+			m.player.Pause()
 		}
 	case tea.WindowSizeMsg:
 		m.stations.SetSize(msg.Width, msg.Height-3)
@@ -118,10 +106,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m model) View() (s string) {
-	var head = "ZiK> " + m.message
-	if player != nil && player.Playing {
-		head = m.spin.View() + head
-	}
+	var head = m.spin.View() + "ZiK> " + m.message
 	return "  " + head + "\n\n" +
 		m.stations.View()
 }

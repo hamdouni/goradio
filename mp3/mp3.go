@@ -3,6 +3,7 @@ package mp3
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 
 	gomp3 "github.com/hajimehoshi/go-mp3"
@@ -56,13 +57,21 @@ func (mp3 *MP3player) Close() {
 func (mp3 *MP3player) Play() (err error) {
 
 	if mp3.Playing {
-		mp3.Close()
+		return fmt.Errorf("mp3 player already playing")
 	}
 
 	go func() {
-		defer mp3.context.Close()
-		defer mp3.player.Close()
-		defer mp3.stream.Body.Close()
+		defer func() {
+			if err := mp3.stream.Body.Close(); err != nil {
+				log.Printf("body close: %s", err)
+			}
+			if err := mp3.player.Close(); err != nil {
+				log.Printf("player close: %s", err)
+			}
+			if err := mp3.context.Close(); err != nil {
+				log.Printf("context close: %s", err)
+			}
+		}()
 		mp3.Playing = true
 		for mp3.Playing {
 			_, err = mp3.dec.Read(mp3.data)

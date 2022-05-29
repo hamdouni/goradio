@@ -3,38 +3,16 @@ package main
 import (
 	"fmt"
 	"goradio/cli"
-	"log"
+	"goradio/player"
 	"os"
-	"os/exec"
-	"syscall"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-func client() error {
-	_, err := os.Stat(namedpipe)
-	if os.IsNotExist(err) {
-		log.Println("client: creating namedpipe")
-		if err := syscall.Mkfifo(namedpipe, 0666); err != nil {
-			return err
-		}
-		// launch server
-		log.Println("client: launching server")
-		cmd := exec.Command(os.Args[0], "-d")
-		cmd.Stderr = os.Stderr
-		cmd.Stdout = os.Stdout
-		if err := cmd.Start(); err != nil {
-			return err
-		}
-	}
+func client(player player.Player) error {
 
-	pipe, err := os.OpenFile(namedpipe, os.O_RDWR, os.ModeNamedPipe)
-	if err != nil {
-		return err
-	}
-	defer pipe.Close()
-
-	p := tea.NewProgram(cli.InitModel(pipe), tea.WithAltScreen())
+	// p := tea.NewProgram(cli.InitModel(player), tea.WithAltScreen())
+	p := tea.NewProgram(cli.InitModel(player))
 	if err := p.Start(); err != nil {
 		fmt.Printf("error: %v", err)
 		os.Exit(1)
