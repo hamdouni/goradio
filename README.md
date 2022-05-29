@@ -1,6 +1,7 @@
 # Goradio
 
 Mp3 stream player in the terminal written in go as a proof of concept.
+The music is played in background so you can quit the terminal.
 
 ## Usage
 
@@ -8,22 +9,31 @@ Build and run :
 ```sh
 git clone https://github.com/hamdouni/goradio
 cd goradio
-go build -o goradio cmd/* 
+go build 
 ./goradio
+```
+
+You can also go install it if you have configured your go path binaries in your PATH :
+```sh
+go install
 ```
 
 The program reads an M3U playlist, named `musics.m3u`, with only mp3 streams (no sublist as .m3u or .pls). 
 
 It renders the content in a list that you can interact with :
 
--  ↑/k : up 
--  ↓/j : down 
--  /   : filter
-- enter: play selected stream
-- space: toggle pause/play
-- q/ctrl+c: quit
+- ↑/k   : up 
+- ↓/j   : down 
+- /     : filter
+- enter : play selected stream
+- space : toggle pause/play
+- o     : jump to actual played station
+- q     : quit but let music in background (also ctrl+c)
+- Q     : quit and stop music
 
-## Cross-compile
+## Cross-compile [DEPRECATED]
+
+**Not working since using namedpipe to communicate between client and server**
 
 ```sh
 GOOS=windows go build -o goradio.exe cmd/*
@@ -43,7 +53,7 @@ The sound part exists because of those great libraries :
 
 [m3u](https://github.com/jamesnetherton/m3u) : A basic golang m3u playlist parser  (MIT License) 
 
-The interface could not have been more simple unless the work of Charm and their products :
+The interface could not have been more simple without the work of Charm and their products :
 
 [bubbletea](https://github.com/charmbracelet/bubbletea) : A powerful little TUI framework (MIT License) 
 
