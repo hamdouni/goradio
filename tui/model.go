@@ -1,14 +1,15 @@
-package cli
+package tui
 
 import (
 	"log"
 
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/spinner"
+	"github.com/jamesnetherton/m3u"
+
+	"goradio/player"
 
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/jamesnetherton/m3u"
-	"goradio/player"
 )
 
 type station struct {
@@ -33,7 +34,7 @@ func initProcess() error {
 	return nil
 }
 
-func InitModel(player player.Player) (m model) {
+func initModel(player player.Player) (m model) {
 	playlist, err := m3u.Parse("musics.m3u")
 	if err != nil {
 		log.Fatal(err)
@@ -125,7 +126,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m model) View() (s string) {
-	var head = m.spin.View() + "ZiK> " + m.message
+	head := m.spin.View() + "ZiK> " + m.message
 	return "  " + head + "\n\n" +
 		m.stations.View()
 }

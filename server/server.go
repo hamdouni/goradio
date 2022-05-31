@@ -1,11 +1,11 @@
-package main
+package server
 
 import (
 	"goradio/mp3"
 	"goradio/player"
 )
 
-func server(responder player.Responder) error {
+func Run(responder player.Responder) error {
 
 	var mp3player *mp3.MP3player
 

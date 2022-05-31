@@ -2,10 +2,13 @@ package main
 
 import (
 	"flag"
-	"goradio/com"
 	"log"
 	"os"
 	"os/exec"
+
+	"goradio/com"
+	"goradio/server"
+	"goradio/tui"
 )
 
 func main() {
@@ -19,7 +22,7 @@ func main() {
 
 	if *daemon {
 		// mode server : on lit le namedpipe
-		if err := server(pipeplayer); err != nil {
+		if err := server.Run(pipeplayer); err != nil {
 			log.Fatalf("server returns %v", err)
 		}
 		os.Exit(0)
@@ -36,7 +39,7 @@ func main() {
 			log.Fatalf("launching server returns %v", err)
 		}
 	}
-	if err := client(pipeplayer); err != nil {
+	if err := tui.Run(pipeplayer); err != nil {
 		log.Fatalf("client returns %v", err)
 	}
 }
