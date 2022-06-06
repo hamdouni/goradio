@@ -13,6 +13,8 @@ https://stream.klassikradio.de/jmjarre/mp3-192
 http://37.187.93.104:8097/stream/1/
 #EXTINF:0,Rainwave Chiptunes: Relais aléatoire
 http://allrelays.rainwave.cc/chiptune.mp3
+#EXTINF:-1,Radio Hyrule World Zelda Music - 192 kbit/s
+http://listen.radiohyrule.com:8000/listen?
 #EXTINF:-1,Jazz Lounge - 320 kbit/s
 http://51.255.235.165:5068/stream/1/
 #EXTINF:-1,Jazz and lounge station
@@ -201,8 +203,6 @@ http://stream.radio.co/s1820bbaf2/listen
 http://maevatropicale.com:8050/stream/1/
 #EXTINF:-1,Radio Suisse Classique - 128 kbit/s
 http://listen.radionomy.com/arcadie
-#EXTINF:-1,Radio Hyrule - 192 kbit/s
-http://listen.radiohyrule.com:8000/listen?
 #EXTINF:-1,Bob's Ska Radio (Low Bitrate) - 192 kbit/s
 http://51.255.235.165:5528/
 #EXTINF:-1,DI Radio Digital Impulse - Blues - 320 kbit/s
