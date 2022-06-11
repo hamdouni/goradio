@@ -1,8 +1,6 @@
 package tui
 
 import (
-	"log"
-
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/spinner"
 	"github.com/jamesnetherton/m3u"
@@ -34,11 +32,7 @@ func initProcess() error {
 	return nil
 }
 
-func initModel(player player.Player) (m model) {
-	playlist, err := m3u.Parse("musics.m3u")
-	if err != nil {
-		log.Fatal(err)
-	}
+func initModel(player player.Player, playlist m3u.Playlist) (m model) {
 	items := []list.Item{}
 	var st station
 	for i, track := range playlist.Tracks {

@@ -2,9 +2,13 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
+
+	"github.com/adrg/xdg"
+	"github.com/jamesnetherton/m3u"
 
 	"goradio/com"
 	"goradio/server"
@@ -13,6 +17,8 @@ import (
 
 func main() {
 	daemon := flag.Bool("d", false, "daemon server mode")
+	info := flag.Bool("i", false, "get information on played music")
+	pause := flag.Bool("p", false, "pause/unpause music")
 	flag.Parse()
 
 	pipeplayer, created, err := com.NewPipePlayer()
@@ -28,6 +34,39 @@ func main() {
 		os.Exit(0)
 	}
 
+	if created && (*info || *pause) {
+		fmt.Println("no music")
+		return
+	}
+
+	if *pause {
+		pipeplayer.Pause()
+		return
+	}
+
+  musicFile,err := xdg.DataFile("goradio/musics.m3u")
+  if err != nil {
+    log.Fatalf("erreur %s\n",err)
+  }
+	playlist, err := m3u.Parse(musicFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if *info {
+		status := pipeplayer.Status()
+		var name string
+		if status != "" {
+			for _, track := range playlist.Tracks {
+				if track.URI == status {
+					name = track.Name
+				}
+			}
+		}
+		fmt.Println(name)
+		return
+	}
+
 	// mode cli
 	if created {
 		// launch server
@@ -39,7 +78,7 @@ func main() {
 			log.Fatalf("launching server returns %v", err)
 		}
 	}
-	if err := tui.Run(pipeplayer); err != nil {
+	if err := tui.Run(pipeplayer, playlist); err != nil {
 		log.Fatalf("client returns %v", err)
 	}
 }

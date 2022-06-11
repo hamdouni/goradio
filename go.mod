@@ -3,6 +3,7 @@ module goradio
 go 1.17
 
 require (
+	github.com/adrg/xdg v0.4.0
 	github.com/charmbracelet/bubbles v0.10.3
 	github.com/charmbracelet/bubbletea v0.20.0
 	github.com/hajimehoshi/go-mp3 v0.3.3
@@ -25,6 +26,6 @@ require (
 	golang.org/x/exp v0.0.0-20190306152737-a1d7652674e8 // indirect
 	golang.org/x/image v0.0.0-20190227222117-0694c2d4d067 // indirect
 	golang.org/x/mobile v0.0.0-20190415191353-3e0bab5405d6 // indirect
-	golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c // indirect
+	golang.org/x/sys v0.0.0-20211025201205-69cdffdb9359 // indirect
 	golang.org/x/term v0.0.0-20210422114643-f5beecf764ed // indirect
 )
