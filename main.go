@@ -44,10 +44,10 @@ func main() {
 		return
 	}
 
-  musicFile,err := xdg.DataFile("goradio/musics.m3u")
-  if err != nil {
-    log.Fatalf("erreur %s\n",err)
-  }
+	musicFile, err := xdg.DataFile("goradio/musics.m3u")
+	if err != nil {
+		log.Fatalf("erreur %s\n", err)
+	}
 	playlist, err := m3u.Parse(musicFile)
 	if err != nil {
 		log.Fatal(err)
@@ -55,20 +55,24 @@ func main() {
 
 	if *info {
 		status := pipeplayer.Status()
-		var name string
-		if status != "" {
-			for _, track := range playlist.Tracks {
-				if track.URI == status {
-					name = track.Name
-				}
+		if status == "" {
+			fmt.Println("no music")
+			return
+		}
+		for _, track := range playlist.Tracks {
+			if track.URI == status {
+				fmt.Println(track.Name)
+				return
 			}
 		}
-		fmt.Println(name)
+		fmt.Println("track not found")
 		return
 	}
 
 	// mode cli
-	if created {
+	status := pipeplayer.Status()
+	log.Printf("debug: %s\n", status)
+	if status == "etimeout" {
 		// launch server
 		log.Println("client: launching server")
 		cmd := exec.Command(os.Args[0], "-d")

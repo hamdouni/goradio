@@ -59,7 +59,7 @@ func (p PipePlayer) ReadRequest() (msg string) {
 }
 
 func (p PipePlayer) ReadResponse() (msg string) {
-	msg, err := p.response.Read()
+	msg, err := p.response.ReadOrTimeout()
 	if err != nil {
 		log.Printf("PipePlayer.ReadResponse got warning: %s", err)
 	}

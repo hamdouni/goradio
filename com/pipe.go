@@ -3,6 +3,7 @@ package com
 import (
 	"os"
 	"syscall"
+	"time"
 )
 
 type Pipe struct {
@@ -29,6 +30,7 @@ func (p *Pipe) Close() error {
 	return os.Remove(p.pipefile.Name())
 }
 
+// Read reads the pipe until any data is available
 func (p *Pipe) Read() (string, error) {
 	buf := make([]byte, 255)
 	_, err := p.pipefile.Read(buf)
@@ -43,6 +45,38 @@ func (p *Pipe) Read() (string, error) {
 		}
 		result += string(v)
 	}
+	return result, nil
+}
+
+// ReadOrTimeout reads the pipe but timeout after 250 ms
+func (p *Pipe) ReadOrTimeout() (string, error) {
+
+	ch := make(chan string, 1)
+
+	go func() {
+		buf := make([]byte, 255)
+		_, err := p.pipefile.Read(buf)
+		if err != nil {
+			ch <- "e" + err.Error()
+		}
+		// extract until \n or null
+		var res string
+		for _, v := range buf {
+			if v == 0 || v == '\n' {
+				break
+			}
+			res += string(v)
+		}
+		ch <- res
+	}()
+
+	var result string
+	select {
+	case result = <-ch:
+	case <-time.After(250 * time.Millisecond):
+		result = "etimeout"
+	}
+
 	return result, nil
 }
 
