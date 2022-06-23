@@ -55,12 +55,12 @@ func main() {
 
 	if *info {
 		status := pipeplayer.Status()
-		if status == "" {
+		if status.URL == "" {
 			fmt.Println("no music")
 			return
 		}
 		for _, track := range playlist.Tracks {
-			if track.URI == status {
+			if track.URI == status.URL {
 				fmt.Println(track.Name)
 				return
 			}
@@ -71,8 +71,8 @@ func main() {
 
 	// mode cli
 	status := pipeplayer.Status()
-	log.Printf("debug: %s\n", status)
-	if status == "etimeout" {
+	log.Printf("debug: %v\n", status)
+	if status.URL == "etimeout" {
 		// launch server
 		log.Println("client: launching server")
 		cmd := exec.Command(os.Args[0], "-d")

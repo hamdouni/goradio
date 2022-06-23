@@ -3,6 +3,7 @@ package server
 import (
 	"goradio/mp3"
 	"goradio/player"
+	"log"
 )
 
 func Run(responder player.Responder) error {
@@ -25,7 +26,25 @@ func Run(responder player.Responder) error {
 			}
 		case 's':
 			if mp3player != nil {
+				var st string
+				if mp3player.Playing {
+					st = "play"
+				} else if mp3player.Paused {
+					st = "pause"
+				}
+				responder.Write(st)
+			} else {
+				responder.Write("none")
+			}
+		case 'u':
+			if mp3player != nil {
 				responder.Write(mp3player.URL)
+			} else {
+				responder.Write("none")
+			}
+		case 'e':
+			if mp3player != nil && mp3player.Err != nil {
+				responder.Write(mp3player.Err.Error())
 			} else {
 				responder.Write("none")
 			}
@@ -38,8 +57,10 @@ func Run(responder player.Responder) error {
 			var err error
 			if mp3player, err = mp3.New(url); err != nil {
 				// @TODO: write err in response
+				log.Printf("mp3 err: %s", err)
 				continue
 			}
+			mp3player.Err = nil
 			mp3player.Play()
 		}
 	}

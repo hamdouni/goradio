@@ -3,7 +3,6 @@ package mp3
 import (
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 
 	gomp3 "github.com/hajimehoshi/go-mp3"
@@ -14,6 +13,7 @@ type MP3player struct {
 	Playing bool
 	Paused  bool
 	URL     string
+	Err     error
 
 	dec     *gomp3.Decoder
 	player  *oto.Player
@@ -36,16 +36,19 @@ func New(url string) (mp3 *MP3player, err error) {
 	}
 	if mp3.stream.StatusCode < 200 || mp3.stream.StatusCode > 299 {
 		mp3.stream.Body.Close()
-		return mp3, fmt.Errorf("erreur http")
+		mp3.Err = fmt.Errorf("erreur http")
+		return mp3, mp3.Err
 	}
 
 	mp3.dec, err = gomp3.NewDecoder(mp3.stream.Body)
 	if err != nil {
-		return mp3, err
+		mp3.Err = fmt.Errorf("erreur decodeur: %s", err)
+		return mp3, mp3.Err
 	}
 
 	if mp3.context, err = oto.NewContext(mp3.dec.SampleRate(), 2, 2, 16384); err != nil {
-		return mp3, err
+		mp3.Err = fmt.Errorf("erreur context: %s", err)
+		return mp3, mp3.Err
 	}
 	mp3.player = mp3.context.NewPlayer()
 
@@ -59,28 +62,31 @@ func (mp3 *MP3player) Close() {
 func (mp3 *MP3player) Play() (err error) {
 
 	if mp3.Playing {
-		return fmt.Errorf("mp3 player already playing")
+		mp3.Err = fmt.Errorf("mp3 player already playing")
+		return mp3.Err
 	}
 
 	go func() {
 		defer func() {
 			if err := mp3.stream.Body.Close(); err != nil {
-				log.Printf("body close: %s", err)
+				mp3.Err = fmt.Errorf("mp3 body close: %s", err)
 			}
 			if err := mp3.player.Close(); err != nil {
-				log.Printf("player close: %s", err)
+				mp3.Err = fmt.Errorf("mp3 player close: %s", err)
 			}
 			if err := mp3.context.Close(); err != nil {
-				log.Printf("context close: %s", err)
+				mp3.Err = fmt.Errorf("mp3 context close: %s", err)
 			}
 		}()
 		mp3.Playing = true
 		for mp3.Playing {
 			_, err = mp3.dec.Read(mp3.data)
 			if err == io.EOF || err != nil {
+				mp3.Err = fmt.Errorf("mp3 read error: %s", err)
 				mp3.Playing = false
 			}
 			if mp3.Playing && !mp3.Paused {
+				mp3.Err = nil
 				mp3.player.Write(mp3.data)
 			}
 		}

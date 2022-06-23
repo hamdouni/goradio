@@ -1,6 +1,10 @@
 package com
 
-import "log"
+import (
+	"fmt"
+	"goradio/player"
+	"log"
+)
 
 const requestnamedpipepath = "/tmp/goradiorequest.np"
 const responsenamedpipepath = "/tmp/goradioresponse.np"
@@ -45,9 +49,12 @@ func (p PipePlayer) Quit() {
 	p.request.Write("q")
 }
 
-func (p PipePlayer) Status() (status string) {
-	p.request.Write("s")
-	return p.ReadResponse()
+func (p PipePlayer) Status() (st player.Stat) {
+	p.request.Write("u")
+	st.URL = p.ReadResponse()
+	p.request.Write("e")
+	st.Err = fmt.Errorf("%s", p.ReadResponse())
+	return st
 }
 
 func (p PipePlayer) ReadRequest() (msg string) {

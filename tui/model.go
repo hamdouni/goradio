@@ -89,14 +89,19 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "enter":
 			m.current = m.selected()
 			m.player.Play(m.current.url)
-			m.message = m.current.name
+			st := m.player.Status()
+			if st.Err != nil {
+				m.message = st.Err.Error()
+			} else {
+				m.message = m.current.name
+			}
 			// cmds = append(cmds, load(m.current.uri))
 		case "Q":
 			m.player.Quit()
 			cmds = append(cmds, tea.Quit)
 		case "o":
-			urlplayer := m.player.Status()
-			idx := m.getIndex(urlplayer)
+			st := m.player.Status()
+			idx := m.getIndex(st.URL)
 			if idx > -1 {
 				m.current.idx = idx
 				m.stations.Select(idx)

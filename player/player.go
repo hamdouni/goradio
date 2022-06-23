@@ -1,9 +1,15 @@
 package player
 
+type Stat struct {
+	Playing bool
+	Err     error
+	URL     string
+}
+
 type Player interface {
 	Play(url string)
 	Pause()
-	Status() string
+	Status() Stat
 	Quit()
 }
 
