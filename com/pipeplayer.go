@@ -52,8 +52,15 @@ func (p PipePlayer) Quit() {
 func (p PipePlayer) Status() (st player.Stat) {
 	p.request.Write("u")
 	st.URL = p.ReadResponse()
+	log.Printf("pipeplayer: url=%s", st.URL)
 	p.request.Write("e")
-	st.Err = fmt.Errorf("%s", p.ReadResponse())
+	res := p.ReadResponse()
+	log.Printf("pipeplayer: res=%s", res)
+	if res != "none" {
+		st.Err = fmt.Errorf("%s", res)
+	} else {
+		st.Err = nil
+	}
 	return st
 }
 

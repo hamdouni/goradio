@@ -57,6 +57,7 @@ func Run(responder player.Responder) error {
 			var err error
 			if mp3player, err = mp3.New(url); err != nil {
 				// @TODO: write err in response
+				mp3player.Err = err
 				log.Printf("mp3 err: %s", err)
 				continue
 			}

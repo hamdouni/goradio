@@ -55,8 +55,11 @@ func main() {
 
 	if *info {
 		status := pipeplayer.Status()
-		if status.URL == "" {
-			fmt.Println("no music")
+		if status.Err != nil {
+			fmt.Printf("err: %s", status.Err.Error()[0:20])
+			return
+		} else if status.URL == "" || status.URL[0:4] != "http" {
+			fmt.Printf("no music: %s", status.URL)
 			return
 		}
 		for _, track := range playlist.Tracks {
@@ -65,7 +68,7 @@ func main() {
 				return
 			}
 		}
-		fmt.Println("track not found")
+		fmt.Printf("track not found: %s", status.URL)
 		return
 	}
 
