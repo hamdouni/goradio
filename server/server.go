@@ -1,14 +1,13 @@
 package server
 
 import (
-	"goradio/mp3"
 	"goradio/player"
 	"log"
 )
 
 func Run(responder player.Responder) error {
 
-	var mp3player *mp3.MP3player
+	var mp3player *MP3player
 
 	defer responder.Close()
 
@@ -55,7 +54,7 @@ func Run(responder player.Responder) error {
 			// le paramètre commence en position 1
 			url := buf[1:]
 			var err error
-			if mp3player, err = mp3.New(url); err != nil {
+			if mp3player, err = NewMP3player(url); err != nil {
 				// @TODO: write err in response
 				mp3player.Err = err
 				log.Printf("mp3 err: %s", err)

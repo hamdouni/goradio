@@ -1,4 +1,4 @@
-package mp3
+package server
 
 import (
 	"fmt"
@@ -19,16 +19,14 @@ type MP3player struct {
 	player  *oto.Player
 	stream  *http.Response
 	context *oto.Context
-	data    []byte
 }
 
-func New(url string) (mp3 *MP3player, err error) {
+func NewMP3player(url string) (mp3 *MP3player, err error) {
 
 	mp3 = new(MP3player)
 
 	mp3.Playing = false
 	mp3.URL = url
-	mp3.data = make([]byte, 512)
 
 	mp3.stream, err = http.Get(url)
 	if err != nil {
@@ -59,7 +57,7 @@ func (mp3 *MP3player) Close() {
 	mp3.Playing = false
 }
 
-func (mp3 *MP3player) Play() (err error) {
+func (mp3 *MP3player) Play() error {
 
 	if mp3.Playing {
 		mp3.Err = fmt.Errorf("mp3 player already playing")
@@ -79,17 +77,20 @@ func (mp3 *MP3player) Play() (err error) {
 			}
 		}()
 		mp3.Playing = true
+		data := make([]byte, 512)
 		for mp3.Playing {
-			_, err = mp3.dec.Read(mp3.data)
-			if err == io.EOF || err != nil {
-				mp3.Err = fmt.Errorf("mp3 read error: %s", err)
-				mp3.Playing = false
-			}
-			if mp3.Playing && !mp3.Paused {
-				mp3.Err = nil
-				mp3.player.Write(mp3.data)
+			if !mp3.Paused {
+				_, err := mp3.dec.Read(data)
+				if err == io.EOF || err != nil {
+					mp3.Err = fmt.Errorf("mp3 read error: %s", err)
+					break
+				} else {
+					mp3.Err = nil
+					mp3.player.Write(data)
+				}
 			}
 		}
+		mp3.Playing = false
 	}()
 
 	return nil
