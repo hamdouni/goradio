@@ -48,8 +48,10 @@ func (p *Pipe) Read() (string, error) {
 	return result, nil
 }
 
-// ReadOrTimeout reads the pipe but timeout after 250 ms
+// ReadOrTimeout reads the pipe but timeout after some time
 func (p *Pipe) ReadOrTimeout() (string, error) {
+
+	const timeout = 300 * time.Millisecond
 
 	ch := make(chan string, 1)
 
@@ -63,17 +65,17 @@ func (p *Pipe) ReadOrTimeout() (string, error) {
 		var res string
 		for _, v := range buf {
 			if v == 0 || v == '\n' {
-				break
+				ch <- res // send it
+				res = ""  // ready for next token
 			}
 			res += string(v)
 		}
-		ch <- res
 	}()
 
 	var result string
 	select {
 	case result = <-ch:
-	case <-time.After(250 * time.Millisecond):
+	case <-time.After(timeout):
 		result = "etimeout"
 	}
 
@@ -81,7 +83,7 @@ func (p *Pipe) ReadOrTimeout() (string, error) {
 }
 
 func (p *Pipe) Write(msg string) error {
-	_, err := p.pipefile.Write([]byte(msg))
+	_, err := p.pipefile.WriteString(msg + "\n")
 	if err != nil {
 		return err
 	}

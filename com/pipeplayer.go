@@ -32,28 +32,23 @@ func NewPipePlayer() (PipePlayer, bool, error) {
 	return pp, created, nil
 }
 
-func (p PipePlayer) Close() {
-	p.request.Close()
-	p.response.Close()
-}
-
 func (p PipePlayer) Play(url string) {
-	p.request.Write("p" + url + "\n")
+	p.WriteRequest("p" + url)
 }
 
 func (p PipePlayer) Pause() {
-	p.request.Write("z")
+	p.WriteRequest("z")
 }
 
 func (p PipePlayer) Quit() {
-	p.request.Write("q")
+	p.WriteRequest("q")
 }
 
 func (p PipePlayer) Status() (st player.Stat) {
-	p.request.Write("u")
+	p.WriteRequest("u")
 	st.URL = p.ReadResponse()
 	log.Printf("pipeplayer: url=%s", st.URL)
-	p.request.Write("e")
+	p.WriteRequest("e")
 	res := p.ReadResponse()
 	log.Printf("pipeplayer: res=%s", res)
 	if res != "none" {
@@ -62,6 +57,11 @@ func (p PipePlayer) Status() (st player.Stat) {
 		st.Err = nil
 	}
 	return st
+}
+
+func (p PipePlayer) Close() {
+	p.request.Close()
+	p.response.Close()
 }
 
 func (p PipePlayer) ReadRequest() (msg string) {
@@ -80,6 +80,10 @@ func (p PipePlayer) ReadResponse() (msg string) {
 	return msg
 }
 
-func (p PipePlayer) Write(msg string) {
+func (p PipePlayer) WriteRequest(msg string) {
+	p.request.Write(msg)
+}
+
+func (p PipePlayer) WriteResponse(msg string) {
 	p.response.Write(msg)
 }

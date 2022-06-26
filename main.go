@@ -28,6 +28,10 @@ func main() {
 
 	if *daemon {
 		// mode server : on lit le namedpipe
+
+		dlog, _ := os.OpenFile("/tmp/goradio-daemon.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		defer dlog.Close()
+		log.SetOutput(dlog)
 		if err := server.Run(pipeplayer); err != nil {
 			log.Fatalf("server returns %v", err)
 		}

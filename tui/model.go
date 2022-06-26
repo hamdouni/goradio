@@ -89,13 +89,13 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "enter":
 			m.current = m.selected()
 			m.player.Play(m.current.url)
+			// time.Sleep(1 * time.Second) // let enough time to server to load music
 			st := m.player.Status()
 			if st.Err != nil {
 				m.message = st.Err.Error()
 			} else {
 				m.message = m.current.name
 			}
-			// cmds = append(cmds, load(m.current.uri))
 		case "Q":
 			m.player.Quit()
 			cmds = append(cmds, tea.Quit)

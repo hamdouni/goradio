@@ -11,6 +11,7 @@ func Run(responder player.Responder) error {
 
 	defer responder.Close()
 
+	var msg string
 	var loop = true
 	for loop {
 		buf := responder.ReadRequest()
@@ -31,22 +32,26 @@ func Run(responder player.Responder) error {
 				} else if mp3player.Paused {
 					st = "pause"
 				}
-				responder.Write(st)
+				responder.WriteResponse(st)
 			} else {
-				responder.Write("none")
+				responder.WriteResponse("none")
 			}
 		case 'u':
 			if mp3player != nil {
-				responder.Write(mp3player.URL)
+				msg = mp3player.URL
 			} else {
-				responder.Write("none")
+				msg = "none"
 			}
+			responder.WriteResponse(msg)
+			log.Printf("i'm asked to give url: %s\n", msg)
 		case 'e':
 			if mp3player != nil && mp3player.Err != nil {
-				responder.Write(mp3player.Err.Error())
+				msg = mp3player.Err.Error()
 			} else {
-				responder.Write("none")
+				msg = "none"
 			}
+			responder.WriteResponse(msg)
+			log.Printf("i'm asked to give error: %s\n", msg)
 		case 'p':
 			if mp3player != nil && mp3player.Playing {
 				mp3player.Close()
@@ -62,6 +67,7 @@ func Run(responder player.Responder) error {
 			}
 			mp3player.Err = nil
 			mp3player.Play()
+			log.Println("i'm asked to play")
 		}
 	}
 	return nil

@@ -15,6 +15,6 @@ type Player interface {
 
 type Responder interface {
 	ReadRequest() string
-	Write(msg string)
+	WriteResponse(msg string)
 	Close()
 }
