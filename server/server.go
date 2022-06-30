@@ -22,15 +22,27 @@ func Run(responder player.Responder) error {
 			loop = false
 		case 'z':
 			if mp3player != nil {
-				mp3player.Paused = !mp3player.Paused
+				if mp3player.Playing {
+					mp3player.Close()
+				} else {
+					actual_url := mp3player.URL
+					var err error
+					if mp3player, err = NewMP3player(actual_url); err != nil {
+						// @TODO: write err in response
+						mp3player.Err = err
+						log.Printf("mp3 err: %s", err)
+						continue
+					}
+					mp3player.Err = nil
+					mp3player.Play()
+					log.Println("i'm asked to play")
+				}
 			}
 		case 's':
 			if mp3player != nil {
 				var st string
 				if mp3player.Playing {
 					st = "play"
-				} else if mp3player.Paused {
-					st = "pause"
 				}
 				responder.WriteResponse(st)
 			} else {

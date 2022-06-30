@@ -11,7 +11,6 @@ import (
 
 type MP3player struct {
 	Playing bool
-	Paused  bool
 	URL     string
 	Err     error
 
@@ -79,15 +78,13 @@ func (mp3 *MP3player) Play() error {
 		mp3.Playing = true
 		data := make([]byte, 512)
 		for mp3.Playing {
-			if !mp3.Paused {
-				_, err := mp3.dec.Read(data)
-				if err == io.EOF || err != nil {
-					mp3.Err = fmt.Errorf("mp3 read error: %s", err)
-					break
-				} else {
-					mp3.Err = nil
-					mp3.player.Write(data)
-				}
+			_, err := mp3.dec.Read(data)
+			if err == io.EOF || err != nil {
+				mp3.Err = fmt.Errorf("mp3 read error: %s", err)
+				break
+			} else {
+				mp3.Err = nil
+				mp3.player.Write(data)
 			}
 		}
 		mp3.Playing = false
