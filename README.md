@@ -35,6 +35,11 @@ It renders the content in a list that you can interact with :
 
 **Not working since using namedpipe to communicate between client and server**
 
+@TODO:
+- [ ] use http server and client for inter process communication
+- [ ] remove namedpipe code
+- [ ] cross-compile !
+
 ```sh
 GOOS=windows go build -o goradio.exe cmd/*
 ```
