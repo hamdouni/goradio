@@ -60,7 +60,11 @@ func main() {
 	if *info {
 		status := pipeplayer.Status()
 		if status.Err != nil {
-			fmt.Printf("err: %s", status.Err.Error()[0:20])
+			m := 20
+			if len(status.Err.Error()) < m {
+				m = len(status.Err.Error())
+			}
+			fmt.Printf("err: %s", status.Err.Error()[0:m])
 			return
 		} else if status.URL == "" || status.URL[0:4] != "http" {
 			fmt.Printf("no music: %s", status.URL)
