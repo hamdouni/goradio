@@ -80,12 +80,10 @@ func (mp3 *MP3player) Play() error {
 		for mp3.Playing {
 			_, err := mp3.dec.Read(data)
 			if err == io.EOF || err != nil {
-				mp3.Err = fmt.Errorf("mp3 read error: %s", err)
-				break
-			} else {
-				mp3.Err = nil
-				mp3.player.Write(data)
+				continue
 			}
+			mp3.Err = nil
+			mp3.player.Write(data)
 		}
 		mp3.Playing = false
 	}()
