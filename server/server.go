@@ -16,6 +16,10 @@ func Run(responder player.Responder) error {
 	for loop {
 		buf := responder.ReadRequest()
 
+		if len(buf) == 0 {
+			continue
+		}
+
 		// ici on doit interpreter le buffer
 		switch buf[0] {
 		case 'q':
