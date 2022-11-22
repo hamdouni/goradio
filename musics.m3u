@@ -1,4 +1,12 @@
 #EXTM3U
+#EXTINF:-1,Radio Nova                           
+http://novazz.ice.infomaniak.ch/novazz-128.mp3
+#EXTINF:-1,FREEDOM REUNION RADIO
+http://freedomice.streamakaci.com/freedom.mp3
+#EXTINF:-1,BARIM.US RADIO
+https://radio.barim.us/stream
+#EXTINF:-1,LOCAL RADIO
+http://localhost:8080/stream
 #EXTINF:-1,Klassik Radio Meditation
 https://stream.klassikradio.de/meditation/mp3-192/radiode/
 #EXTINF:-1,ANTENNE BAYERN - Chillout
@@ -733,8 +741,6 @@ http://ns378395.ip-5-196-68.eu:8000/airtime_192
 http://str30.creacast.com/radio_nevers
 #EXTINF:-1,Radio Notre Dame                     
 https://windu.radionotredame.net/RadioNotreDame-Fm.mp3
-#EXTINF:-1,Radio Nova                           
-http://broadcast.infomaniak.net/radionova-high.mp3
 #EXTINF:-1,Radio Occitania                      
 http://radio-occitania.tetaneutral.net:8000/occitania.mp3
 #EXTINF:-1,Radio Orient                         
