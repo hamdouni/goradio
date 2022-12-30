@@ -18,7 +18,7 @@ type MP3player struct {
 func New(url string) (mp3 *MP3player, err error) {
 	stream, err := http.Get(url)
 	if err != nil {
-		return mp3, err
+		return mp3, fmt.Errorf("could not get url %s", err)
 	}
 	if stream.StatusCode < 200 || stream.StatusCode > 299 {
 		stream.Body.Close()
@@ -26,11 +26,11 @@ func New(url string) (mp3 *MP3player, err error) {
 	}
 	decoder, err := gomp3.NewDecoder(stream.Body)
 	if err != nil {
-		return mp3, err
+		return mp3, fmt.Errorf("could not decode stream %s", err)
 	}
 	context, ready, err := oto.NewContext(decoder.SampleRate(), 2, 2)
 	if err != nil {
-		return mp3, err
+		return mp3, fmt.Errorf("could not get oto context %s", err)
 	}
 	<-ready
 	player := context.NewPlayer(decoder)

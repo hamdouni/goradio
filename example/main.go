@@ -1,17 +1,20 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"goradio/network/mp3"
 	"log"
 )
 
-func main() {
+var station = flag.String("station", "https://radio.barim.us/stream", "url of a stream radio")
 
-	player, err := mp3.New("http://51.255.235.165:5068/stream/1/")
-	// player, err := mp3.New("http://radio.barim.us/stream")
+func main() {
+	flag.Parse()
+	log.Printf("Playing %s\n", *station)
+	player, err := mp3.New(*station)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("error: %s", err)
 	}
 	player.Play()
 	defer player.Close()
