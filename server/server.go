@@ -39,7 +39,6 @@ func Run(responder player.Responder) error {
 					}
 					mp3player.Err = nil
 					mp3player.Play()
-					log.Println("i'm asked to play")
 				}
 			}
 		case 's':
@@ -59,7 +58,6 @@ func Run(responder player.Responder) error {
 				msg = "none"
 			}
 			responder.WriteResponse(msg)
-			log.Printf("i'm asked to give url: %s\n", msg)
 		case 'e':
 			if mp3player != nil && mp3player.Err != nil {
 				msg = mp3player.Err.Error()
@@ -67,7 +65,6 @@ func Run(responder player.Responder) error {
 				msg = "none"
 			}
 			responder.WriteResponse(msg)
-			log.Printf("i'm asked to give error: %s\n", msg)
 		case 'p':
 			if mp3player != nil && mp3player.Playing {
 				mp3player.Close()
@@ -83,7 +80,6 @@ func Run(responder player.Responder) error {
 			}
 			mp3player.Err = nil
 			mp3player.Play()
-			log.Println("i'm asked to play")
 		}
 	}
 	return nil
