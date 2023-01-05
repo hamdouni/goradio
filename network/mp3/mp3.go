@@ -3,6 +3,7 @@ package mp3
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	gomp3 "github.com/hajimehoshi/go-mp3"
 	"github.com/hajimehoshi/oto/v2"
@@ -54,6 +55,7 @@ func (mp3 *MP3player) Play() (err error) {
 		defer mp3.stream.Body.Close()
 		mp3.player.Play()
 		for mp3.player.IsPlaying() {
+			time.Sleep(1 * time.Second)
 		}
 	}()
 	return nil
