@@ -35,6 +35,7 @@ func New(url string) (mp3 *MP3player, err error) {
 	}
 	<-ready
 	player := context.NewPlayer(decoder)
+	player.(oto.BufferSizeSetter).SetBufferSize(15000)
 
 	mp3 = &MP3player{
 		dec:     decoder,
@@ -47,6 +48,7 @@ func New(url string) (mp3 *MP3player, err error) {
 }
 
 func (mp3 *MP3player) Close() {
+	mp3.stream.Body.Close()
 	mp3.player.Close()
 }
 
