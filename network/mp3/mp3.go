@@ -47,6 +47,14 @@ func New(url string) (mp3 *MP3player, err error) {
 	return mp3, nil
 }
 
+func (mp3 *MP3player) Pause() {
+	if mp3.player.IsPlaying() {
+		mp3.player.Pause()
+	} else {
+		mp3.player.Play()
+	}
+}
+
 func (mp3 *MP3player) Close() {
 	mp3.stream.Body.Close()
 	mp3.player.Close()
@@ -56,7 +64,7 @@ func (mp3 *MP3player) Play() (err error) {
 	go func() {
 		defer mp3.stream.Body.Close()
 		mp3.player.Play()
-		for mp3.player.IsPlaying() {
+		for {
 			time.Sleep(1 * time.Second)
 		}
 	}()

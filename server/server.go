@@ -26,20 +26,20 @@ func Run(responder player.Responder) error {
 			loop = false
 		case 'z':
 			if mp3player != nil {
-				if mp3player.Playing {
-					mp3player.Close()
-				} else {
-					actual_url := mp3player.URL
-					var err error
-					if mp3player, err = NewMP3player(actual_url); err != nil {
-						// @TODO: write err in response
-						mp3player.Err = err
-						log.Printf("mp3 err: %s", err)
-						continue
-					}
-					mp3player.Err = nil
-					mp3player.Play()
-				}
+				mp3player.Pause()
+				// if mp3player.Playing {
+				// } else {
+				// 	actual_url := mp3player.URL
+				// 	var err error
+				// 	if mp3player, err = NewMP3player(actual_url); err != nil {
+				// 		// @TODO: write err in response
+				// 		mp3player.Err = err
+				// 		log.Printf("mp3 err: %s", err)
+				// 		continue
+				// 	}
+				// 	mp3player.Err = nil
+				// 	mp3player.Play()
+				// }
 			}
 		case 's':
 			if mp3player != nil {

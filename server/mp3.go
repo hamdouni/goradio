@@ -23,6 +23,10 @@ func NewMP3player(url string) (mp3 *MP3player, err error) {
 	return mp3, nil
 }
 
+func (m *MP3player) Pause() {
+	m.NetWorkPlayer.Pause()
+}
+
 func (m *MP3player) Close() {
 	m.Playing = false
 	m.NetWorkPlayer.Close()
