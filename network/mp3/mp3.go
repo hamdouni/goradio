@@ -16,6 +16,8 @@ type MP3player struct {
 	context *oto.Context
 }
 
+var context *oto.Context
+
 func New(url string) (mp3 *MP3player, err error) {
 	stream, err := http.Get(url)
 	if err != nil {
@@ -29,11 +31,14 @@ func New(url string) (mp3 *MP3player, err error) {
 	if err != nil {
 		return mp3, fmt.Errorf("could not decode stream %s", err)
 	}
-	context, ready, err := oto.NewContext(decoder.SampleRate(), 2, 2)
-	if err != nil {
-		return mp3, fmt.Errorf("could not get oto context %s", err)
+	if context == nil {
+		var ready chan struct{}
+		context, ready, err = oto.NewContext(decoder.SampleRate(), 2, 2)
+		if err != nil {
+			return mp3, fmt.Errorf("could not get oto context %s", err)
+		}
+		<-ready
 	}
-	<-ready
 	player := context.NewPlayer(decoder)
 	player.(oto.BufferSizeSetter).SetBufferSize(15000)
 
