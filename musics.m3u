@@ -1,5 +1,7 @@
 #EXTM3U
-#EXTINF:-1,Radio Nova                           
+#EXTINF:-1,Radio Paradise                 
+http://stream.radioparadise.com/mp3-128
+#EXTINF:-1,Nova                           
 http://novazz.ice.infomaniak.ch/novazz-128.mp3
 #EXTINF:-1,FREEDOM REUNION RADIO
 http://freedomice.streamakaci.com/freedom.mp3
@@ -21,7 +23,7 @@ https://stream.klassikradio.de/jmjarre/mp3-192
 http://academyf.radioca.st/stream
 #EXTINF:0,Rainwave Chiptunes: Relais aléatoire
 http://allrelays.rainwave.cc/chiptune.mp3
-#EXTINF:-1,Radio Hyrule World Zelda Music - 192 kbit/s
+#EXTINF:-1,Hyrule World Zelda Music - 192 kbit/s
 http://listen.radiohyrule.com:8000/listen?
 #EXTINF:-1,Jazz Lounge - 320 kbit/s
 http://51.255.235.165:5068/stream/1/
@@ -51,7 +53,7 @@ http://airspectrum.cdnstream1.com:8024/1302_192
 http://66.55.145.43:7051/
 #EXTINF:-1,Nirvana Ambient
 http://radio.108.pl:8002
-#EXTINF:-1,Radio Nature
+#EXTINF:-1,Nature
 http://listen.radionomy.com:80/RadioNature
 #EXTINF:-1,STR [spacetravelradio.de]
 http://136.243.156.30:1701/stream/2/
@@ -107,13 +109,13 @@ http://5.135.154.69:11590/stream/1/
 http://91.121.164.210:8032/stream/1/
 #EXTINF:-1,FREEDOM2 - 96 kbit/s
 http://stric6.streamakaci.com:80/freedom2.mp3
-#EXTINF:-1,Radio Accordeon - 128 kbit/s
+#EXTINF:-1,Accordeon - 128 kbit/s
 http://live1.jupinfo.fr:8000/radioaccordeon
-#EXTINF:-1,Radio Gazelle (MB RECASTER) - 128 kbit/s
+#EXTINF:-1,Gazelle (MB RECASTER) - 128 kbit/s
 http://srv2.streaming-ingenierie.fr:8134/stream/1/
 #EXTINF:-1,Planet Ambi HD Radio - Music For Relaxation - 320 kbit/s
 http://176.31.107.8:9019/stream/1/
-#EXTINF:-1,Radio D+ - 320 kbit/s
+#EXTINF:-1,D+ - 320 kbit/s
 http://tachyon.shoutca.st:8303/xstream
 #EXTINF:-1,TRT Tamil Olli - 128 kbit/s
 http://91.121.165.41:9035/stream.mp3
@@ -173,13 +175,13 @@ http://maxxima.mine.nu:8000/maxxima.mp3
 http://centova17.ciclanohost.com.br:8085/stream/1/
 #EXTINF:-1,FLOR FM COLMAR - 128 kbit/s
 http://stream.florfm.com:8000/florfm
-#EXTINF:-1,Radio Luna Ser - 128 kbit/s
+#EXTINF:-1,Luna Ser - 128 kbit/s
 http://srv0625.emisorasonline.com:8003/stream
 #EXTINF:-1,LA PACHANGUERA FM - 128 kbit/s
 http://radiolatina.info:8772/stream/1/
 #EXTINF:-1,CFM FRENCHIE 128mp3 - 128 kbit/s
 http://cdn.nrjaudio.fm/adwz1/fr/30213/mp3_128.mp3
-#EXTINF:-1,Radio Stad - 128 kbit/s
+#EXTINF:-1,Stad - 128 kbit/s
 http://5.196.131.97:8344/stream/1/
 #EXTINF:-1,JamendoLounge - 128 kbit/s
 http://listen.radionomy.com/wiccaradio
@@ -195,7 +197,7 @@ http://streaming.radionti.com/nti-128.mp3
 http://mp3.magic-radio.net
 #EXTINF:-1,RFM  GUADELOUPE (MB RECASTER) - 128 kbit/s
 http://163.172.96.134:8090/stream/1/
-#EXTINF:-1,Radio Flash Montpellier Cevennes Mediterranee - 128 kbit/s
+#EXTINF:-1,Flash Montpellier Cevennes Mediterranee - 128 kbit/s
 http://37.187.16.224:8000/stream/1/
 #EXTINF:-1,Paradisagasy - Madagascar - radioparadisagasy.com - 128 kbit/s
 http://radiart.eu:10018/live
@@ -209,21 +211,21 @@ http://hd.lagrosseradio.info:8000/lagrosseradio-rock-192.mp3
 http://stream.radio.co/s1820bbaf2/listen
 #EXTINF:-1,PLAY ZOUK ANTILLES 24/7 - 128 kbit/s
 http://maevatropicale.com:8050/stream/1/
-#EXTINF:-1,Radio Suisse Classique - 128 kbit/s
+#EXTINF:-1,Suisse Classique - 128 kbit/s
 http://listen.radionomy.com/arcadie
 #EXTINF:-1,Bob's Ska Radio (Low Bitrate) - 192 kbit/s
 http://51.255.235.165:5528/
 #EXTINF:-1,DI Radio Digital Impulse - Blues - 320 kbit/s
 http://orion.shoutca.st:8990/stream/1/
-#EXTINF:-1,Radio Santiago - Guimaraes, Portugal - 320 kbit/s
+#EXTINF:-1,Santiago - Guimaraes, Portugal - 320 kbit/s
 http://eu6.fastcast4u.com:5002/stream
 #EXTINF:-1,Lounge Radio Deluxe (VIP) - 128 kbit/s
 http://94.23.252.14:8147/stream/1/
-#EXTINF:-1,Radio Firat Fm 87.3 - 128 kbit/s
+#EXTINF:-1,Firat Fm 87.3 - 128 kbit/s
 http://yayin.firatfm.com:3065/stream/1/
 #EXTINF:-1,citylockradio - 128 kbit/s
 http://94.23.27.122:10690/stream/1/
-#EXTINF:-1,Radio Esperance - 128 kbit/s
+#EXTINF:-1,Esperance - 128 kbit/s
 http://stric6.streamakaci.com/esperance.mp3
 #EXTINF:-1,Radiomeuh.com - 128 kbit/s
 http://radiomeuh.ice.infomaniak.ch/radiomeuh-128.mp3
@@ -253,7 +255,7 @@ http://stream.lazaradio.com/mulatos64.mp3
 http://37.59.28.208:8169/stream/1/
 #EXTINF:-1,FUNRADIO - 96 kbit/s
 http://163.172.96.134:8110/stream/1/
-#EXTINF:-1,Radio Junior - 128 kbit/s
+#EXTINF:-1,Junior - 128 kbit/s
 http://stream.votreradiosurlenet.eu/radiojunior.mp3
 #EXTINF:-1,WhiteFoxRadio - 128 kbit/s
 http://listen.radionomy.com/White-Fox-Radio
@@ -263,7 +265,7 @@ http://37.187.79.93:8192/stream/1/
 http://streaming.hotmix-radio.net/hotmixradio-lounge-128.mp3
 #EXTINF:-1,Airtime! - 64 kbit/s
 http://vh11367x.out.airtime.pro:8000/vh11367x_a
-#EXTINF:-1,Radio Darom 97 FM (Live) - 128 kbit/s
+#EXTINF:-1,Darom 97 FM (Live) - 128 kbit/s
 http://gly-audioswitch1.ecast.co.il:9000/darom97fm
 #EXTINF:-1,RADIO SAINT LOUIS (MB RECASTER) - 128 kbit/s
 http://91.121.29.104:8142/stream/1/
@@ -631,143 +633,143 @@ http://radiopublicsante.ice.infomaniak.ch/radiopublicsante-192.mp3
 http://str0.creacast.com/purelectro
 #EXTINF:-1,Pyrenee FM                           
 http://antenne.pyreneesfm.com/direct.mp3
-#EXTINF:-1,Radio 4                              
+#EXTINF:-1,4                              
 http://91.121.208.101:8000/radio4.mp3
-#EXTINF:-1,Radio 8                              
+#EXTINF:-1,8                              
 http://www.tv-radio.com/cgi-bin/tagger.pl?tag=site&metafile=8/8-20k.asx
-#EXTINF:-1,Radio A                              
+#EXTINF:-1,A                              
 http://www.votreradiosurlenet.eu/leson/radioa.hd.asx
-#EXTINF:-1,Radio Alpes Mancelles                
+#EXTINF:-1,Alpes Mancelles                
 http://www.streamakaci.com/radios/ram72.asx
-#EXTINF:-1,Radio Asso                           
+#EXTINF:-1,Asso                           
 http://91.121.15.95:8000/stream.mp3
-#EXTINF:-1,Radio Aviva                          
+#EXTINF:-1,Aviva                          
 http://stream.franclr.fr:8000/radioaviva
-#EXTINF:-1,Radio Ballade                        
+#EXTINF:-1,Ballade                        
 http://noasrv.caster.fm:10119/stream
-#EXTINF:-1,Radio Beton                          
+#EXTINF:-1,Beton                          
 http://51.254.220.198:8000/stream.mp3
-#EXTINF:-1,Radio BLV                            
+#EXTINF:-1,BLV                            
 http://live.crancra.org/RadioBLV
-#EXTINF:-1,Radio Bonheur                        
+#EXTINF:-1,Bonheur                        
 http://radiobonheur.ice.infomaniak.ch/radiobonheur-128-1.mp3
-#EXTINF:-1,Radio Boomerang                      
+#EXTINF:-1,Boomerang                      
 http://109.190.81.136:8000/radioboomerang.mp3
-#EXTINF:-1,Radio Cadence Musique                
+#EXTINF:-1,Cadence Musique                
 http://188.165.32.218:8008/stream
-#EXTINF:-1,Radio Campus Angers                  
+#EXTINF:-1,Campus Angers                  
 http://80.82.229.202/rca
-#EXTINF:-1,Radio Campus Avignon                 
+#EXTINF:-1,Campus Avignon                 
 http://airtime.radiocampusavignon.fr:8000/live
-#EXTINF:-1,Radio Campus Bordeaux                
+#EXTINF:-1,Campus Bordeaux                
 http://www.radiocampus.fr:8000/campus-bordeaux
-#EXTINF:-1,Radio Campus Brest                   
+#EXTINF:-1,Campus Brest                   
 http://live.radiocampus.org:8000/radio-u.mp3
-#EXTINF:-1,Radio Campus Clermont-Ferrand        
+#EXTINF:-1,Campus Clermont-Ferrand        
 http://campus.abeille.com:8000/campus
-#EXTINF:-1,Radio Campus Dijon                   
+#EXTINF:-1,Campus Dijon                   
 http://frequence.u-bourgogne.fr:8082/dijoncampus
-#EXTINF:-1,Radio Campus Grenoble                
+#EXTINF:-1,Campus Grenoble                
 http://live.campusgrenoble.org:9000/rcg112
-#EXTINF:-1,Radio Campus Lille                   
+#EXTINF:-1,Campus Lille                   
 http://broadcast.infomaniak.net/radiocampuslille-128.mp3
-#EXTINF:-1,Radio Campus Montpellier             
+#EXTINF:-1,Campus Montpellier             
 http://stream.franclr.fr:8000/radiocampus
-#EXTINF:-1,Radio Campus Orleans                 
+#EXTINF:-1,Campus Orleans                 
 http://orleans.radiocampus.org:8000/stream_rco
-#EXTINF:-1,Radio Campus Paris                   
+#EXTINF:-1,Campus Paris                   
 http://www.radiocampusparis.org:8000/stream_rcp
-#EXTINF:-1,Radio Campus Rennes                  
+#EXTINF:-1,Campus Rennes                  
 http://stream.radiocampusrennes.fr:8001/rcr
-#EXTINF:-1,Radio Campus Toulouse                
+#EXTINF:-1,Campus Toulouse                
 http://live.radio-campus.org:8000/toulouse
-#EXTINF:-1,Radio Caroline                       
+#EXTINF:-1,Caroline                       
 http://195.154.113.150:8000/caroline.mp3
-#EXTINF:-1,Radio Classique                      
+#EXTINF:-1,Classique                      
 http://radioclassique.ice.infomaniak.ch/radioclassique-high.mp3
-#EXTINF:-1,Radio Conde Macou                    
+#EXTINF:-1,Conde Macou                    
 http://radiocondemacou.free.fr/rcm/listen.asx
-#EXTINF:-1,Radio Cote d'Amour                   
+#EXTINF:-1,Cote d'Amour                   
 http://46.105.102.136:8000/RCA-NANTES.mp3
-#EXTINF:-1,Radio Couserans                      
+#EXTINF:-1,Couserans                      
 http://radiocouserans.ice.infomaniak.ch/radiocouserans-128.mp3
-#EXTINF:-1,Radio Cristal                        
+#EXTINF:-1,Cristal                        
 http://stream.inovacast.fr:8888/stream
-#EXTINF:-1,Radio D4B                            
+#EXTINF:-1,D4B                            
 http://server2.sebastienrama.com:8000/live/stream.mp3
-#EXTINF:-1,Radio Dreyeckland                    
+#EXTINF:-1,Dreyeckland                    
 http://broadcast.infomaniak.net/radiodreyeckland-128.mp3
-#EXTINF:-1,Radio En Construction                
+#EXTINF:-1,En Construction                
 http://str0.creacast.com/rec
-#EXTINF:-1,Radio Espace                         
+#EXTINF:-1,Espace                         
 http://broadcast.infomaniak.ch:8000/radioespace-high.mp3
-#EXTINF:-1,Radio Essentiel                      
+#EXTINF:-1,Essentiel                      
 http://broadcast.infomaniak.net/fcradio-128.mp3
-#EXTINF:-1,Radio FG                             
+#EXTINF:-1,FG                             
 http://radiofg.impek.com/fg
-#EXTINF:-1,Radio FG Belgique                    
+#EXTINF:-1,FG Belgique                    
 http://radiofg.impek.com/fga.mp3
-#EXTINF:-1,Radio Fidelite                       
+#EXTINF:-1,Fidelite                       
 http://80.82.229.202/fidelite.mp3
-#EXTINF:-1,Radio Fugi                           
+#EXTINF:-1,Fugi                           
 http://92.175.228.15:8000/stream.mp3
-#EXTINF:-1,Radio G!                             
+#EXTINF:-1,G!                             
 http://80.82.229.202/radiog.mp3
-#EXTINF:-1,Radio Galere                         
+#EXTINF:-1,Galere                         
 http://www.radiogalere.org:8080/galere.mp3
-#EXTINF:-1,Radio Grille Ouverte                 
+#EXTINF:-1,Grille Ouverte                 
 http://stream.franclr.fr:8000/rgo.mp3
-#EXTINF:-1,Radio HDR                            
+#EXTINF:-1,HDR                            
 http://streaming.principeactif.net:8000/hdr.mp3
-#EXTINF:-1,Radio Kol Hachalom                   
+#EXTINF:-1,Kol Hachalom                   
 http://broadcast.infomaniak.ch/radiokolhachalom-high.mp3
-#EXTINF:-1,Radio Latitude                       
+#EXTINF:-1,Latitude                       
 http://broadcast.infomaniak.net/latitude-128.mp3
-#EXTINF:-1,Radio Lenga d'Oc                     
+#EXTINF:-1,Lenga d'Oc                     
 http://stream.franclr.fr:8000/lengadocnarbonne
-#EXTINF:-1,Radio Marseillette                   
+#EXTINF:-1,Marseillette                   
 http://151.80.42.124:8000/marseillette.mp3
-#EXTINF:-1,Radio Mega                           
+#EXTINF:-1,Mega                           
 http://live.francra.org:8000/Radio-Mega
-#EXTINF:-1,Radio Menergy                        
+#EXTINF:-1,Menergy                        
 http://radiomenergy.ice.infomaniak.ch/radiomenergy-128.mp3
-#EXTINF:-1,Radio Mercure                        
+#EXTINF:-1,Mercure                        
 http://media.radiomercure.net:8000/live
-#EXTINF:-1,Radio Mille Pattes                   
+#EXTINF:-1,Mille Pattes                   
 http://broadcast.infomaniak.ch/millepattes-high.mp3
-#EXTINF:-1,Radio MNE                            
+#EXTINF:-1,MNE                            
 http://ns378395.ip-5-196-68.eu:8000/airtime_192
-#EXTINF:-1,Radio Nevers                         
+#EXTINF:-1,Nevers                         
 http://str30.creacast.com/radio_nevers
-#EXTINF:-1,Radio Notre Dame                     
+#EXTINF:-1,Notre Dame                     
 https://windu.radionotredame.net/RadioNotreDame-Fm.mp3
-#EXTINF:-1,Radio Occitania                      
+#EXTINF:-1,Occitania                      
 http://radio-occitania.tetaneutral.net:8000/occitania.mp3
-#EXTINF:-1,Radio Orient                         
+#EXTINF:-1,Orient                         
 http://stream3.broadcast-associes.com:8405/Radio-Orient
-#EXTINF:-1,Radio Phenix                         
+#EXTINF:-1,Phenix                         
 http://live.radio-campus.org:8000/caen.mp3
-#EXTINF:-1,Radio Plus Douvrin                   
+#EXTINF:-1,Plus Douvrin                   
 http://91.121.120.162:8000/radioplus.mp3
-#EXTINF:-1,Radio Primitive                      
+#EXTINF:-1,Primitive                      
 http://www.radioprimitive.fr:8000/live
-#EXTINF:-1,Radio Puisaleine                     
+#EXTINF:-1,Puisaleine                     
 http://broadcast.infomaniak.net/radiopuisaleine-128.mp3
-#EXTINF:-1,Radio Pulsar                         
+#EXTINF:-1,Pulsar                         
 http://www.votreradiosurlenet.eu/leson/pulsar.hd.asx
-#EXTINF:-1,Radio Radio                          
+#EXTINF:-1,Radio                          
 http://62.210.215.26:8000/xstream
-#EXTINF:-1,Radio Saint Affrique                 
+#EXTINF:-1,Saint Affrique                 
 http://live.francra.org:8000/RadioSaintAffrique
-#EXTINF:-1,Radio Soleil                         
+#EXTINF:-1,Soleil                         
 http://broadcast.infomaniak.net/radiosoleil-96.mp3
-#EXTINF:-1,Radio Sommieres                      
+#EXTINF:-1,Sommieres                      
 http://stream.franclr.fr:8000/sommieres
-#EXTINF:-1,Radio Star                           
+#EXTINF:-1,Star                           
 http://radiostar-hd.scdn.arkena.com/live.mp3
-#EXTINF:-1,Radio Vinci Autoroute                
+#EXTINF:-1,Vinci Autoroute                
 http://str0.creacast.com/radio_vinci_autoroutes_1
-#EXTINF:-1,Radio Zenith                         
+#EXTINF:-1,Zenith                         
 http://zenith-radio.com:8000/RZ192.mp3
 #EXTINF:-1,Radio-Cristal                        
 http://broadcast.infomaniak.net/radiocristal-high.mp3
@@ -780,7 +782,7 @@ http://rcf.streamakaci.com/rcf.mp3
 #EXTINF:-1,RCM                                  
 http://players.creacast.com/creacast/rcm/playlist.asx
 #EXTINF:-1,RDL                                  
-http://www.tv-radio.com/cgi-bin/tagger.pl?tag=site&metafile=rdl/rdl-20k.asx
+http://www.tv-radio.com/cgi-bin/tagger.pl
 #EXTINF:-1,RDM                                  
 http://www.radiojunior.com/leson/rdm.asx
 #EXTINF:-1,Remzouille Radio                     
@@ -820,7 +822,7 @@ http://broadcast.infomaniak.ch/start-sud-high.mp3
 #EXTINF:-1,Sweet FM                             
 http://dedibox-linux.sweetfm.fr:8000/alc
 #EXTINF:-1,Swing FM                             
-http://swingfm.ice.infomaniak.ch/swingfm-128.mp3?type=.flv&ua=Infomaniak%20Flash%20Player%20v2&
+http://swingfm.ice.infomaniak.ch/swingfm-128.mp3
 #EXTINF:-1,Tendance Ouest                       
 http://streaming.tendanceouest.com/tomanche.mp3
 #EXTINF:-1,Tonic Radio                          
@@ -831,20 +833,6 @@ http://aratotem.ice.infomaniak.ch/aveyron.mp3
 http://mediam.streamakaci.com/toulousefm.mp3
 #EXTINF:-1,Vibration                            
 http://broadcast.infomaniak.ch/vibration-high.mp3
-#EXTINF:-1,Virgin Radio                         
-http://vr-live-mp3-128.scdn.arkena.com/virginradio.mp3
-#EXTINF:-1,Virgin Radio Classics                
-http://vr-wr2-mp3-128.scdn.arkena.com/virginradio.mp3
-#EXTINF:-1,Virgin Radio Electroshock            
-http://vr-wr3-mp3-128.scdn.arkena.com/virginradio.mp3
-#EXTINF:-1,Virgin Radio Hits                    
-http://vr-wr4-mp3-128.scdn.arkena.com/virginradio.mp3
-#EXTINF:-1,Virgin Radio New                     
-http://vr-wr1-mp3-128.scdn.arkena.com/virginradio.mp3
-#EXTINF:-1,Virgin Radio Rock                    
-http://vr-wr5-mp3-128.scdn.arkena.com/virginradio.mp3
-#EXTINF:-1,Virgin Tonic Radio                   
-http://vr-wr6-mp3-128.scdn.arkena.com/virginradio.mp3
 #EXTINF:-1,Vivre FM                             
 http://broadcast.infomaniak.net/vivrefm-128.mp3
 #EXTINF:-1,Voltage                              
