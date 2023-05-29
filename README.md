@@ -52,14 +52,12 @@ Thank you to all of them for bringing those awesome projects.
 
 The sound part exists because of those great libraries :
 
-[oto](https://github.com/hajimehoshi/oto) : A low-level library to play sound on multiple platforms (Apache-2.0 License)
-
-[go-mp3](https://github.com/hajimehoshi/go-mp3) : An MP3 decoder in pure Go (Apache-2.0 License)
-
-[m3u](https://github.com/jamesnetherton/m3u) : A basic golang m3u playlist parser  (MIT License) 
+* [oto](https://github.com/hajimehoshi/oto) : A low-level library to play sound on multiple platforms (Apache-2.0 License)
+* [go-mp3](https://github.com/hajimehoshi/go-mp3) : An MP3 decoder in pure Go (Apache-2.0 License)
+* [m3u](https://github.com/jamesnetherton/m3u) : A basic golang m3u playlist parser  (MIT License) 
+* [shoutcast](github.com/romantomjak/shoutcast) : All the heavy lifting of the shoutcast protocole to retrieve stream title (MIT License)
 
 The interface could not have been more simple without the work of Charm and their products :
 
-[bubbletea](https://github.com/charmbracelet/bubbletea) : A powerful little TUI framework (MIT License) 
-
-[bubbles](https://github.com/charmbracelet/bubbles) : TUI components for Bubble Tea (MIT License) 
+* [bubbletea](https://github.com/charmbracelet/bubbletea) : A powerful little TUI framework (MIT License) 
+* [bubbles](https://github.com/charmbracelet/bubbles) : TUI components for Bubble Tea (MIT License) 

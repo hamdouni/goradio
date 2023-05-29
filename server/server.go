@@ -51,6 +51,13 @@ func Run(responder player.Responder) error {
 			} else {
 				responder.WriteResponse("none")
 			}
+		case 't':
+			if mp3player != nil {
+				msg = mp3player.Title
+			} else {
+				msg = ""
+			}
+			responder.WriteResponse(msg)
 		case 'u':
 			if mp3player != nil {
 				msg = mp3player.URL
@@ -71,6 +78,7 @@ func Run(responder player.Responder) error {
 			}
 			// le paramètre commence en position 1
 			url := buf[1:]
+			log.Printf("URL:%v", url)
 			var err error
 			if mp3player, err = NewMP3player(url); err != nil {
 				// @TODO: write err in response

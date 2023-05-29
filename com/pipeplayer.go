@@ -45,6 +45,8 @@ func (p PipePlayer) Quit() {
 }
 
 func (p PipePlayer) Status() (st player.Stat) {
+	p.WriteRequest("t")
+	st.Title = p.ReadResponse()
 	p.WriteRequest("u")
 	st.URL = p.ReadResponse()
 	p.WriteRequest("e")

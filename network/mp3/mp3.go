@@ -2,8 +2,9 @@ package mp3
 
 import (
 	"fmt"
-	"net/http"
 	"time"
+
+	"goradio/shoutcast"
 
 	gomp3 "github.com/hajimehoshi/go-mp3"
 	"github.com/hajimehoshi/oto/v2"
@@ -12,22 +13,24 @@ import (
 type MP3player struct {
 	player  oto.Player
 	dec     *gomp3.Decoder
-	stream  *http.Response
+	stream  *shoutcast.Stream
 	context *oto.Context
 }
 
 var context *oto.Context
 
-func New(url string) (mp3 *MP3player, err error) {
-	stream, err := http.Get(url)
+func New(url string, callback func(*shoutcast.Metadata)) (mp3 *MP3player, err error) {
+
+	// open shoutcast stream
+	stream, err := shoutcast.Open(url)
 	if err != nil {
-		return mp3, fmt.Errorf("could not get url %s", err)
+		return mp3, fmt.Errorf("could not open shoutcast stream at %s: %s", url, err)
 	}
-	if stream.StatusCode < 200 || stream.StatusCode > 299 {
-		stream.Body.Close()
-		return mp3, fmt.Errorf("erreur http")
-	}
-	decoder, err := gomp3.NewDecoder(stream.Body)
+
+	// register a callback function to be called when song changes
+	stream.MetadataCallbackFunc = callback
+
+	decoder, err := gomp3.NewDecoder(stream)
 	if err != nil {
 		return mp3, fmt.Errorf("could not decode stream %s", err)
 	}
@@ -61,13 +64,13 @@ func (mp3 *MP3player) Pause() {
 }
 
 func (mp3 *MP3player) Close() {
-	mp3.stream.Body.Close()
+	mp3.stream.Close()
 	mp3.player.Close()
 }
 
 func (mp3 *MP3player) Play() (err error) {
 	go func() {
-		defer mp3.stream.Body.Close()
+		defer mp3.stream.Close()
 		mp3.player.Play()
 		for {
 			time.Sleep(1 * time.Second)

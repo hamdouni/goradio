@@ -1,26 +1,32 @@
 package server
 
 import (
-	gonet "goradio/network/mp3"
+	"goradio/network/mp3"
+
+	"goradio/shoutcast"
 )
 
 type MP3player struct {
 	Playing       bool
 	URL           string
+	Title         string
 	Err           error
-	NetWorkPlayer *gonet.MP3player
+	NetWorkPlayer *mp3.MP3player
 }
 
-func NewMP3player(url string) (mp3 *MP3player, err error) {
-	mp3 = new(MP3player)
-	mp3.Playing = false
-	mp3.URL = url
-	netmp3, err := gonet.New(url)
+func NewMP3player(url string) (player *MP3player, err error) {
+	player = new(MP3player)
+	player.Playing = false
+	player.URL = url
+	netmp3, err := mp3.New(url, func(m *shoutcast.Metadata) {
+		// callback
+		player.Title = m.StreamTitle
+	})
 	if err != nil {
-		return mp3, err
+		return player, err
 	}
-	mp3.NetWorkPlayer = netmp3
-	return mp3, nil
+	player.NetWorkPlayer = netmp3
+	return player, nil
 }
 
 func (m *MP3player) Pause() {

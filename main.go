@@ -66,6 +66,9 @@ func main() {
 			}
 			fmt.Printf("err: %s", status.Err.Error()[0:m])
 			return
+		} else if status.Title != "" {
+			fmt.Print(status.Title)
+			return
 		} else if status.URL == "" || status.URL[0:4] != "http" {
 			fmt.Printf("no music: %s", status.URL)
 			return

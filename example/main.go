@@ -3,8 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"goradio/network/mp3"
 	"log"
+
+	"goradio/network/mp3"
+	"goradio/shoutcast"
 )
 
 var station = flag.String("station", "https://radio.barim.us/stream", "url of a stream radio")
@@ -12,7 +14,9 @@ var station = flag.String("station", "https://radio.barim.us/stream", "url of a 
 func main() {
 	flag.Parse()
 	log.Printf("Playing %s\n", *station)
-	player, err := mp3.New(*station)
+	player, err := mp3.New(*station, func(m *shoutcast.Metadata) {
+		println("Now listening to: ", m.StreamTitle)
+	})
 	if err != nil {
 		log.Fatalf("error: %s", err)
 	}

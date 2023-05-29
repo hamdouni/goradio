@@ -4,6 +4,7 @@ type Stat struct {
 	Playing bool
 	Err     error
 	URL     string
+	Title   string
 }
 
 type Player interface {
