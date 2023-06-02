@@ -64,13 +64,13 @@ func main() {
 			if len(status.Err.Error()) < m {
 				m = len(status.Err.Error())
 			}
-			fmt.Printf("err: %s", status.Err.Error()[0:m])
+			fmt.Printf("%s", status.Err.Error()[0:m])
 			return
 		} else if status.Title != "" {
 			fmt.Print(status.Title)
 			return
 		} else if status.URL == "" || status.URL[0:4] != "http" {
-			fmt.Printf("no music: %s", status.URL)
+			fmt.Print("no music")
 			return
 		}
 		for _, track := range playlist.Tracks {

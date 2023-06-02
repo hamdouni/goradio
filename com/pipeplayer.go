@@ -51,7 +51,9 @@ func (p PipePlayer) Status() (st player.Stat) {
 	st.URL = p.ReadResponse()
 	p.WriteRequest("e")
 	res := p.ReadResponse()
-	if res != "none" {
+	if res == "etimeout" {
+		st.Err = fmt.Errorf("no music")
+	} else if res != "none" {
 		st.Err = fmt.Errorf("%s", res)
 	} else {
 		st.Err = nil
