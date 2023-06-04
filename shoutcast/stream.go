@@ -78,9 +78,12 @@ func Open(url string) (*Stream, error) {
 		}
 	}
 
-	metaint, err := strconv.Atoi(resp.Header.Get("icy-metaint"))
-	if err != nil {
-		return nil, fmt.Errorf("cannot parse metaint: %v", err)
+	var metaint int = 16000
+	if rawMetaint := resp.Header.Get("icy-metaint"); rawMetaint != "" {
+		metaint, err = strconv.Atoi(rawMetaint)
+		if err != nil {
+			return nil, fmt.Errorf("cannot parse metaint: %v", err)
+		}
 	}
 
 	s := &Stream{

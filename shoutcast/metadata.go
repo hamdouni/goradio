@@ -15,7 +15,7 @@ func NewMetadata(b []byte) *Metadata {
 	m := &Metadata{}
 
 	props := strings.Split(string(b), ";")
-	log.Print("[DEBUG] Received metadata: ", props)
+	log.Printf("[DEBUG] Received metadata: %#v ", props)
 
 	for _, prop := range props {
 		if prop == "" {
