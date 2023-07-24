@@ -1,6 +1,8 @@
 package server
 
 import (
+	"log"
+
 	"goradio/network/mp3"
 
 	"goradio/shoutcast"
@@ -40,5 +42,7 @@ func (m *MP3player) Close() {
 
 func (m *MP3player) Play() {
 	m.Playing = true
-	m.NetWorkPlayer.Play()
+	if err := m.NetWorkPlayer.Play(); err != nil {
+		log.Printf("Play: %s", err)
+	}
 }

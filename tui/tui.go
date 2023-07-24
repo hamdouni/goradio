@@ -10,7 +10,7 @@ import (
 // Run the terminal user interface
 func Run(player player.Player, playlist m3u.Playlist) error {
 	p := tea.NewProgram(initModel(player, playlist), tea.WithAltScreen())
-	if err := p.Start(); err != nil {
+	if _, err := p.Run(); err != nil {
 		return err
 	}
 	return nil

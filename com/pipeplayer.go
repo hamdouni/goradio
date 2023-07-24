@@ -2,12 +2,15 @@ package com
 
 import (
 	"fmt"
-	"goradio/player"
 	"log"
+
+	"goradio/player"
 )
 
-const requestnamedpipepath = "/tmp/goradiorequest.np"
-const responsenamedpipepath = "/tmp/goradioresponse.np"
+const (
+	requestnamedpipepath  = "/tmp/goradiorequest.np"
+	responsenamedpipepath = "/tmp/goradioresponse.np"
+)
 
 type PipePlayer struct {
 	request  Pipe
@@ -83,9 +86,13 @@ func (p PipePlayer) ReadResponse() (msg string) {
 }
 
 func (p PipePlayer) WriteRequest(msg string) {
-	p.request.Write(msg)
+	if err := p.request.Write(msg); err != nil {
+		log.Printf("PipePlayer.WriteRequest got err: %s", err)
+	}
 }
 
 func (p PipePlayer) WriteResponse(msg string) {
-	p.response.Write(msg)
+	if err := p.response.Write(msg); err != nil {
+		log.Printf("PipePlayer.WriteResponse got err: %s", err)
+	}
 }

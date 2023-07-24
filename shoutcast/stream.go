@@ -51,6 +51,9 @@ func Open(url string) (*Stream, error) {
 	log.Print("[INFO] Opening ", url)
 
 	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, err
+	}
 	req.Header.Add("accept", "*/*")
 	req.Header.Add("user-agent", "iTunes/12.9.2 (Macintosh; OS X 10.14.3) AppleWebKit/606.4.5")
 	req.Header.Add("icy-metadata", "1")
@@ -78,7 +81,7 @@ func Open(url string) (*Stream, error) {
 		}
 	}
 
-	var metaint int = 16000
+	metaint := 16000
 	if rawMetaint := resp.Header.Get("icy-metaint"); rawMetaint != "" {
 		metaint, err = strconv.Atoi(rawMetaint)
 		if err != nil {
@@ -104,6 +107,9 @@ func Open(url string) (*Stream, error) {
 // Read implements the standard Read interface
 func (s *Stream) Read(buf []byte) (dataLen int, err error) {
 	dataLen, err = s.rc.Read(buf)
+	if err != nil {
+		return 0, err
+	}
 
 	checkedDataLen := 0
 	uncheckedDataLen := dataLen
@@ -139,6 +145,9 @@ func (s *Stream) extractMetadata(p []byte) (int, error) {
 	var metabuf []byte
 	var err error
 	length := int(p[0]) * 16
+	if length > 32 {
+		return 0, fmt.Errorf("metadata incoherent")
+	}
 	end := length + 1
 	complete := false
 	if length > 0 {

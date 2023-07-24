@@ -54,7 +54,7 @@ func makeMetadata(s string) []byte {
 	// needs to be a multiple of 16
 	msize := byte(math.Ceil(float64(len(s)) / 16.0))
 
-	buf := make([]byte, 16*msize+1, 16*msize+1)
+	buf := make([]byte, 16*msize+1)
 	buf[0] = msize
 	copy(buf[1:], s)
 
@@ -63,7 +63,7 @@ func makeMetadata(s string) []byte {
 
 // insertMetadata inserts `metadata` into `data` every `n` bytes
 func insertMetadata(data []byte, metadata []byte, n int) []byte {
-	numMetadata := int(math.Ceil(float64(len(data) / n)))
+	numMetadata := int(float64(len(data) / n))
 
 	bufSize := len(metadata)*numMetadata + len(data)
 	buf := make([]byte, bufSize)
@@ -88,19 +88,19 @@ func insertMetadata(data []byte, metadata []byte, n int) []byte {
 
 func TestRequiredHTTPHeadersArePresent(t *testing.T) {
 	var headers http.Header
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	ts := httptest.NewServer(http.HandlerFunc(func(_ http.ResponseWriter, r *http.Request) {
 		headers = r.Header
 	}))
 	defer ts.Close()
 
-	Open(ts.URL)
+	_, _ = Open(ts.URL)
 
 	assertStrings(t, headers.Get("icy-metadata"), "1")
 	assertStrings(t, headers.Get("user-agent")[:6], "iTunes")
 }
 
 func TestMissingBitrate(t *testing.T) {
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header()["icy-metaint"] = []string{"100"}
 		w.WriteHeader(200)
 	}))
@@ -110,14 +110,14 @@ func TestMissingBitrate(t *testing.T) {
 }
 
 func TestUnexpectedEOF(t *testing.T) {
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("icy-br", "192")
 		w.Header().Set("icy-metaint", "1")
 
 		metadata := makeMetadata("SongTitle='Prospa Prayer';")
 		stream := insertMetadata([]byte{1, 1}, metadata, 1)
 		// unexpected EOF in the middle of a metadata block
-		w.Write(stream[:len(stream)-10])
+		_, _ = w.Write(stream[:len(stream)-10])
 	}))
 	defer ts.Close()
 
@@ -152,13 +152,13 @@ func TestUnexpectedEOF(t *testing.T) {
 }
 
 func TestMetaintEqualsClientBufferLength(t *testing.T) {
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("icy-br", "192")
 		w.Header().Set("icy-metaint", "2")
 
 		metadata := makeMetadata("SongTitle='Prospa Prayer';")
 		stream := insertMetadata([]byte{1, 1, 1, 1, 1, 1}, metadata, 2)
-		w.Write(stream)
+		_, _ = w.Write(stream)
 	}))
 	defer ts.Close()
 
@@ -203,13 +203,13 @@ func TestMetaintEqualsClientBufferLength(t *testing.T) {
 }
 
 func TestMetaintGreaterThanClientBufferLength(t *testing.T) {
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("icy-br", "192")
 		w.Header().Set("icy-metaint", "3")
 
 		metadata := makeMetadata("SongTitle='Prospa Prayer';")
 		stream := insertMetadata([]byte{1, 1, 1, 1, 1, 1}, metadata, 3)
-		w.Write(stream)
+		_, _ = w.Write(stream)
 	}))
 	defer ts.Close()
 
@@ -248,13 +248,13 @@ func TestMetaintGreaterThanClientBufferLength(t *testing.T) {
 }
 
 func TestClientBufferLargeEnoughForMetadata(t *testing.T) {
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("icy-br", "192")
 		w.Header().Set("icy-metaint", "3")
 
 		metadata := makeMetadata("SongTitle='Prospa Prayer';")
 		stream := insertMetadata([]byte{3, 4, 5, 6, 7, 8, 9}, metadata, 3)
-		w.Write(stream)
+		_, _ = w.Write(stream)
 	}))
 	defer ts.Close()
 
@@ -279,13 +279,13 @@ func TestClientBufferLargeEnoughForMetadata(t *testing.T) {
 }
 
 func TestClientBufferLargeEnoughForTwoTimesMetadata(t *testing.T) {
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("icy-br", "192")
 		w.Header().Set("icy-metaint", "3")
 
 		metadata := makeMetadata("SongTitle='Prospa Prayer';")
 		stream := insertMetadata([]byte{3, 4, 5, 6, 7, 8, 9, 10}, metadata, 3)
-		w.Write(stream)
+		_, _ = w.Write(stream)
 	}))
 	defer ts.Close()
 

@@ -28,10 +28,6 @@ type model struct {
 	player   player.Player
 }
 
-func initProcess() error {
-	return nil
-}
-
 func initModel(player player.Player, playlist m3u.Playlist) (m model) {
 	items := []list.Item{}
 	var st station

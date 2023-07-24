@@ -20,7 +20,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("error: %s", err)
 	}
-	player.Play()
+	if err := player.Play(); err != nil {
+		log.Fatalf("error: %s", err)
+	}
 	defer player.Close()
 
 	println("press enter to quit...")
